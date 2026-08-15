@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify Bonafide</title>
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="wrap">
+    <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+  </div>
+</div>
+
+<div class="middle-wrapper"><div class="container">
+  <div class="panel"><div class="panel-body" id="box">Checking...</div></div>
+</div></div>
+
+<footer><p>All Rights Reserved &copy; 2026. M.K.S. COLLEGE</p></footer>
+
+<script src="js/app.js"></script>
+<script>
+const uregNo = qs('ureg_no');
+const app = findApplication(uregNo);
+const box = document.getElementById('box');
+
+if (app) {
+  box.innerHTML = `
+    <h3 class="ok">&#10003; Valid Bonafide Record</h3>
+    <p><strong>Name:</strong> ${esc(app.student_name)}</p>
+    <p><strong>Father's Name:</strong> ${esc(app.father_name)}</p>
+    <p><strong>Course:</strong> ${esc(app.course_name)} / ${esc(app.department)} / ${esc(app.ac_year)}</p>
+    <p><strong>Reference No.:</strong> ${esc(app.reference_no)}</p>
+    <p><strong>Transaction ID:</strong> ${esc(app.transaction_id)}</p>`;
+} else {
+  box.innerHTML = `<h3 class="err">&times; No matching record found.</h3>
+    <p style="font-size:13px;color:#666;">Note: this demo verifies against records stored in the browser that generated the certificate. On a real server, QR verification checks a shared database instead.</p>`;
+}
+</script>
+</body>
+</html>

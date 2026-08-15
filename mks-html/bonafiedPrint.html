@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Admission Portal</title>
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="wrap">
+    <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+    <div class="call-sec">
+      <h4>For Online Portal Related Query - 6203898139, 8102725827, 7857868200, 9942496795, 6207724443, 9942491931, 7061459153, 6203555913</h4>
+      <a class="btn btn-primary" href="#" onclick="return false;">Mid Term Examnation Slip</a>
+    </div>
+  </div>
+</div>
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="student-registration.html">Online Application</a></li>
+    <li><a href="check-university-record.html">Reprint</a></li>
+  </ul>
+</nav>
+
+<div class="middle-wrapper"><div class="container">
+
+  <div id="notFoundBox" class="err" style="display:none;padding:20px;">No application found for this reference number.</div>
+
+  <div id="slipBox" style="display:none;">
+    <div class="no-print" style="margin:15px 0;">
+      <button class="btn btn-primary" onclick="window.print()">Print Slip</button>
+      <a class="btn btn-primary" id="certLink" href="#" target="_blank">Print Bonafied Certificate</a>
+    </div>
+
+    <table class="slip-table">
+      <tr><td colspan="5"><strong>BONAFIDE SLIP</strong></td></tr>
+      <tr>
+        <td><strong>Date</strong></td><td id="s_date"></td>
+        <td><strong>Receipt No.</strong></td><td id="s_receipt"></td>
+        <td rowspan="5" style="vertical-align:middle;">
+          <div class="qr_container">
+            <div class="mb-1"><b id="s_session_top"></b></div>
+            <div id="qr_holder"></div>
+            <div><b id="s_ref2"></b></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Name</strong></td><td id="s_name"></td>
+        <td><strong>Father's Name</strong></td><td id="s_father"></td>
+      </tr>
+      <tr>
+        <td><strong>Roll No.</strong></td><td id="s_roll"></td>
+        <td><strong>Category</strong></td><td id="s_category"></td>
+      </tr>
+      <tr>
+        <td><strong>Course</strong></td><td id="s_course"></td>
+        <td><strong>Program</strong></td><td id="s_dept"></td>
+      </tr>
+      <tr>
+        <td><strong>Academic Year</strong></td><td id="s_acyear"></td>
+        <td><strong>Session</strong></td><td id="s_session"></td>
+      </tr>
+      <tr>
+        <td><strong>Gender</strong></td><td id="s_gender"></td>
+        <td><strong>Ref. No.</strong></td><td colspan="2" id="s_ref"></td>
+      </tr>
+      <tr><td colspan="2"><strong>Transaction ID :</strong></td><td colspan="3" id="s_txn"></td></tr>
+      <tr><td colspan="2"><strong>Total Paid</strong></td><td colspan="3" id="s_paid"></td></tr>
+    </table>
+  </div>
+
+</div></div>
+
+<footer><p>All Rights Reserved &copy; 2026. M.K.S. COLLEGE</p></footer>
+
+<script src="js/qrcode.min.js"></script>
+<script src="js/app.js"></script>
+<script>
+const uregNo = qs('ureg_no');
+const app = findApplication(uregNo);
+
+if (!app) {
+  document.getElementById('notFoundBox').style.display = 'block';
+} else {
+  document.getElementById('slipBox').style.display = 'block';
+  document.getElementById('s_date').textContent = todayDMY();
+  document.getElementById('s_receipt').textContent = app.receipt_no;
+  document.getElementById('s_name').textContent = app.student_name;
+  document.getElementById('s_father').textContent = app.father_name;
+  document.getElementById('s_roll').textContent = app.col_roll;
+  document.getElementById('s_category').textContent = app.category;
+  document.getElementById('s_course').textContent = app.course_name;
+  document.getElementById('s_dept').textContent = app.department;
+  document.getElementById('s_acyear').textContent = app.ac_year;
+  document.getElementById('s_session').textContent = app.session;
+  document.getElementById('s_gender').textContent = app.gender;
+  document.getElementById('s_ref').textContent = app.reference_no;
+  document.getElementById('s_ref2').textContent = app.reference_no;
+  document.getElementById('s_session_top').textContent = app.session;
+  document.getElementById('s_txn').textContent = app.transaction_id;
+  document.getElementById('s_paid').innerHTML = `<strong>${app.total_paid} &nbsp; (Rs. ${amountInWords(app.total_paid)} Only )</strong>`;
+  document.getElementById('certLink').href = 'bonafiedCertificate.html?ureg_no=' + encodeURIComponent(uregNo);
+
+  const verifyUrl = window.location.origin + window.location.pathname.replace('bonafiedPrint.html', 'verify-transaction.html')
+    + '?course_name=' + encodeURIComponent(app.course_name)
+    + '&ac_year=' + encodeURIComponent(app.ac_year)
+    + '&ureg_no=' + encodeURIComponent(app.reference_no)
+    + '&fee_category=BONAFIDE%20FEE';
+
+  const qr = qrcode(0, 'M');
+  qr.addData(verifyUrl);
+  qr.make();
+  document.getElementById('qr_holder').innerHTML = qr.createImgTag(4, 4);
+}
+</script>
+</body>
+</html>

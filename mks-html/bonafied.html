@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Admission Portal</title>
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="wrap">
+    <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+    <div class="call-sec">
+      <h4>For Online Portal Related Query - 6203898139, 7857868200, 7061459153, 6207724443, 6203555913, 9942496795, 8102725827, 9942491931</h4>
+      <a class="btn btn-primary" href="#" onclick="return false;">Mid Term Examnation Slip</a>
+    </div>
+  </div>
+</div>
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="student-registration.html">Online Application</a></li>
+    <li><a href="check-university-record.html">Reprint</a></li>
+  </ul>
+</nav>
+
+<div class="middle-wrapper"><div class="container">
+
+  <div class="row">
+    <div class="col-12">
+      <h2 class="btn btn-danger btn-block">Apply For BONAFIDE</h2>
+      <ul><li>Any wrong information in form fill up will cause cancellation of BONAFIDE.</li></ul>
+    </div>
+  </div>
+
+  <div id="notFoundBox" class="err" style="display:none;padding:20px;">
+    Invalid or expired reference number. Please <a href="student-registration.html">register again</a>.
+  </div>
+
+  <div class="panel" id="formBox"><div class="panel-body">
+    <form id="appForm">
+      <div class="row form-group">
+
+        <div class="col-3"><div class="form-group">
+          <label>Student Name (अभ्यर्थी का नाम) *</label>
+          <input type="text" class="form-control" id="student_name" required>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Father Name *</label>
+          <input type="text" class="form-control" id="father_name" required>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Mother Name *</label>
+          <input type="text" class="form-control" id="mother_name" required>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Date of Birth (जन्म तिथि) *</label>
+          <input type="date" class="form-control" id="dob" required>
+        </div></div>
+
+        <div class="col-3"><div class="form-group">
+          <label>Category *</label>
+          <select id="category" class="form-control" required>
+            <option value="">Select Category</option>
+            <option>GENERAL</option><option>BC-I</option><option>BC-II</option><option>S.C.</option><option>S.T.</option>
+          </select>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Date of Admission *</label>
+          <input type="date" class="form-control" id="doa" required>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Gender</label>
+          <select id="gender" class="form-control" required>
+            <option value="">Select Gender</option><option>FEMALE</option><option>MALE</option>
+          </select>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Session Year *</label>
+          <select id="session" class="form-control" required>
+            <option value="">Please Select Session</option>
+            <option>2023-27</option><option>2024-28</option><option>2025-29</option><option>2026-30</option>
+          </select>
+        </div></div>
+
+        <div class="col-3"><div class="form-group">
+          <label>Course Name</label>
+          <input type="text" class="form-control" id="course_name" readonly>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Programme Name</label>
+          <input type="text" class="form-control" id="department" readonly>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Year</label>
+          <input type="text" class="form-control" id="ac_year" readonly>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>College Roll No.</label>
+          <input type="text" class="form-control" id="col_roll" required>
+        </div></div>
+
+        <div class="col-4"><div class="form-group">
+          <label>Mobile *</label>
+          <input type="text" class="form-control" id="mobile" maxlength="10" pattern="^[0-9]+" required>
+        </div></div>
+        <div class="col-4"><div class="form-group">
+          <label>Email *</label>
+          <input type="email" class="form-control" id="email" required>
+        </div></div>
+        <div class="col-4"><div class="form-group">
+          <label>State (राज्य) *</label>
+          <select id="pstate" class="form-control" required>
+            <option value="">Select Permanent State</option>
+          </select>
+        </div></div>
+
+        <div class="col-3"><div class="form-group"><label>Village *</label><input type="text" class="form-control" id="village" required></div></div>
+        <div class="col-3"><div class="form-group"><label>District (जिला) *</label><input type="text" class="form-control" id="pdistrict" required></div></div>
+        <div class="col-3"><div class="form-group"><label>Pincode (पिनकोड) *</label><input type="number" class="form-control" id="ppin" required></div></div>
+        <div class="col-3"><div class="form-group"><label>Post *</label><input type="text" class="form-control" id="post" required></div></div>
+        <div class="col-3"><div class="form-group"><label>Police Station *</label><input type="text" class="form-control" id="police_station" required></div></div>
+        <div class="col-3"><div class="form-group"><label>Fee Paid *</label><input type="number" class="form-control" id="fee_paid" required></div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Reason For Bonafide *</label>
+          <select id="reason" class="form-control" required>
+            <option value="">Reason For Bonafide</option>
+            <option selected>For Scholorship</option>
+          </select>
+        </div></div>
+
+        <div class="col-3"><div class="form-group">
+          <label>Upload Photograph *</label>
+          <input type="file" id="student_photo" accept=".jpg,.jpeg,.png" required>
+          <img id="photoPreview" src="images/no_image.gif" alt="" width="120" style="margin-top:8px;display:block;">
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Upload Admission Slip *</label>
+          <input type="file" id="admission_slip" accept=".jpg,.jpeg,.png,.pdf" required>
+        </div></div>
+
+        <div class="col-4" style="margin-top:15px;"><input type="submit" value="Submit" class="btn btn-primary"></div>
+      </div>
+    </form>
+  </div></div>
+
+</div></div>
+
+<footer><p>All Rights Reserved &copy; 2026. M.K.S. COLLEGE</p></footer>
+
+<script src="js/app.js"></script>
+<script>
+const uregNo = qs('ureg_no');
+const student = findStudent(uregNo);
+
+if (!student) {
+  document.getElementById('formBox').style.display = 'none';
+  document.getElementById('notFoundBox').style.display = 'block';
+} else {
+  document.getElementById('student_name').value = student.student_name;
+  document.getElementById('father_name').value = student.father_name;
+  document.getElementById('col_roll').value = student.col_roll;
+  document.getElementById('course_name').value = student.course;
+  document.getElementById('department').value = student.department;
+  document.getElementById('ac_year').value = student.ac_year;
+
+  const stateSel = document.getElementById('pstate');
+  STATES.forEach(s => stateSel.innerHTML += `<option>${s}</option>`);
+
+  document.getElementById('student_photo').addEventListener('change', async function () {
+    if (this.files[0]) {
+      document.getElementById('photoPreview').src = await fileToDataUrl(this.files[0]);
+    }
+  });
+
+  document.getElementById('appForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    let photoData = '', slipData = '', slipName = '';
+    const photoFile = document.getElementById('student_photo').files[0];
+    const slipFile = document.getElementById('admission_slip').files[0];
+    if (photoFile) photoData = await fileToDataUrl(photoFile);
+    if (slipFile) { slipData = await fileToDataUrl(slipFile); slipName = slipFile.name; }
+
+    const app = {
+      reference_no: uregNo,
+      student_name: document.getElementById('student_name').value.trim(),
+      father_name: document.getElementById('father_name').value.trim(),
+      mother_name: document.getElementById('mother_name').value.trim(),
+      dob: document.getElementById('dob').value,
+      category: document.getElementById('category').value,
+      doa: document.getElementById('doa').value,
+      gender: document.getElementById('gender').value,
+      session: document.getElementById('session').value,
+      course_name: document.getElementById('course_name').value,
+      department: document.getElementById('department').value,
+      ac_year: document.getElementById('ac_year').value,
+      col_roll: document.getElementById('col_roll').value.trim(),
+      mobile: document.getElementById('mobile').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      pstate: document.getElementById('pstate').value,
+      village: document.getElementById('village').value.trim(),
+      pdistrict: document.getElementById('pdistrict').value.trim(),
+      ppin: document.getElementById('ppin').value.trim(),
+      post: document.getElementById('post').value.trim(),
+      police_station: document.getElementById('police_station').value.trim(),
+      fee_paid: document.getElementById('fee_paid').value,
+      reason: document.getElementById('reason').value,
+      student_photo: photoData,
+      admission_slip_name: slipName,
+      receipt_no: genReceiptNo(),
+      transaction_id: genTransactionId(),
+      total_paid: 100,
+      created_at: new Date().toISOString()
+    };
+
+    const apps = getApplications();
+    apps.push(app);
+    saveApplications(apps);
+
+    const students = getStudents().map(s => s.ureg_no === uregNo ? { ...s, status: 'APPLIED' } : s);
+    saveStudents(students);
+
+    window.location.href = 'bonafiedPrint.html?ureg_no=' + encodeURIComponent(uregNo);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bonafide Certificate</title>
+<link rel="stylesheet" href="css/custom.css">
+<style>@media print{@page{margin:0;}} body{background:#fff;}</style>
+</head>
+<body>
+
+<div id="notFoundBox" class="err" style="display:none;padding:20px;">No application found for this reference number.</div>
+
+<div id="certBox" class="cert-box" style="display:none;">
+  <div style="text-align:center;margin-bottom:10px;">
+    <img src="images/logo.png" style="height:90px;">
+  </div>
+  <h3>BONAFIDE CERTIFICATE</h3>
+
+  <div class="cert-row">
+    <span>This is to certificate that Ms/Mrs</span>
+    <div class="dotted" id="c_name"></div>
+  </div>
+  <div class="cert-row">
+    <span>S/O, D/O, Mr./Mrs.</span>
+    <div class="dotted" id="c_father"></div>
+    <span>is a Bonafide Student</span>
+  </div>
+  <div class="cert-row">
+    <span>of</span>
+    <div class="dotted">Mahakavi Kalidas Suryadev College, Chandauna</div>
+  </div>
+  <div class="cert-row">
+    <span>*** MOBILE NO. OF BONAFIDE STUDENT</span>
+    <div class="dotted" id="c_mobile"></div>
+  </div>
+
+  <p><b>Following Columns must be filled by Nodal Officer (PMSP) or Authorized person of&nbsp;the<br>
+  institute appointed by Head of the institution.</b></p>
+
+  <table width="100%">
+    <tr>
+      <td style="width:65%;vertical-align:top;">
+        <div class="cert-row"><span>Category :</span><div class="dotted" id="c_category"></div></div>
+        <div class="cert-row"><span>Session :</span><div class="dotted" id="c_session"></div></div>
+        <div class="cert-row"><span>Academic Year :</span><div class="dotted" id="c_acyear"></div></div>
+        <div class="cert-row"><span>Class</span><div class="dotted" id="c_class"></div><span>Class Roll</span><div class="dotted" id="c_roll"></div></div>
+        <div class="cert-row"><span>Course Name</span><div class="dotted" id="c_course"></div><span>Course Duration</span><div class="dotted">4 year</div></div>
+      </td>
+      <td style="width:35%;text-align:center;vertical-align:top;">
+        <img id="c_photo" src="images/no_image.gif" style="height:170px;width:200px;object-fit:cover;border:1px solid #999;">
+        <p style="font-size:17px;font-family:'Trebuchet MS',Helvetica,sans-serif;font-weight:500;">Attested by institution Head/Nodal</p>
+      </td>
+    </tr>
+  </table>
+
+  <p style="font-size:20px;">Admission Date : &nbsp; <span id="c_doa"></span></p>
+  <p style="font-size:20px;">Amount Paid By Applicant : &nbsp; <span id="c_paid"></span></p>
+
+  <div style="text-align:right;margin-top:40px;font-size:20px;">
+    Signature of Institution's Head<br>(With Original Seal)
+  </div>
+
+  <div class="no-print" style="text-align:center;margin-top:25px;">
+    <button class="btn btn-primary" onclick="window.print()">Print Certificate</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+const uregNo = qs('ureg_no');
+const app = findApplication(uregNo);
+
+if (!app) {
+  document.getElementById('notFoundBox').style.display = 'block';
+} else {
+  document.getElementById('certBox').style.display = 'block';
+  document.getElementById('c_name').textContent = app.student_name;
+  document.getElementById('c_father').textContent = app.father_name;
+  document.getElementById('c_mobile').textContent = app.mobile;
+  document.getElementById('c_category').textContent = app.category;
+  document.getElementById('c_session').textContent = app.session;
+  document.getElementById('c_acyear').textContent = app.ac_year;
+  document.getElementById('c_class').textContent = app.department;
+  document.getElementById('c_roll').textContent = app.col_roll;
+  document.getElementById('c_course').textContent = app.course_name;
+  document.getElementById('c_doa').textContent = app.doa;
+  document.getElementById('c_paid').textContent = app.total_paid;
+  if (app.student_photo) document.getElementById('c_photo').src = app.student_photo;
+}
+</script>
+</body>
+</html>

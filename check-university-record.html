@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Admission Portal</title>
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="wrap">
+    <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+    <div class="call-sec">
+      <h4>For Online Portal Related Query - 6203898139, 8102725827, 7857868200, 9942496795, 6207724443, 9942491931, 7061459153, 6203555913</h4>
+      <a class="btn btn-primary" href="#" onclick="return false;">Mid Term Examnation Slip</a>
+    </div>
+  </div>
+</div>
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="student-registration.html">Online Application</a></li>
+    <li><a href="check-university-record.html">Reprint</a></li>
+  </ul>
+</nav>
+
+<div class="middle-wrapper"><div class="container">
+  <div class="row">
+    <div class="col-6" style="margin:0 auto;">
+      <h2>Check Your Reference No. for This College</h2>
+      <form id="lookupForm">
+        <div class="form-group">
+          <input type="text" id="uni_number" class="form-control" placeholder="Enter Your Reference No." required>
+        </div>
+        <div class="form-group">
+          <select id="course" class="form-control">
+            <option value="">Choose Course Name</option>
+            <option>INTERMEDIATE</option><option>DEGREE</option><option>POST GRADUATE</option>
+          </select>
+        </div>
+        <div class="form-group"><input type="submit" class="btn btn-primary" value="Search"></div>
+      </form>
+      <div style="text-align:center;">
+        <h3 style="color:#d9534f;">Student Register With this Link for bonafide
+          <a href="student-registration.html">Click Here</a></h3>
+      </div>
+      <div id="result"></div>
+    </div>
+  </div>
+</div></div>
+
+<footer><p>All Rights Reserved &copy; 2026. M.K.S. COLLEGE</p></footer>
+
+<script src="js/app.js"></script>
+<script>
+document.getElementById('lookupForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const ref = document.getElementById('uni_number').value.trim();
+  const student = findStudent(ref);
+  const box = document.getElementById('result');
+  if (!student) {
+    box.innerHTML = '<p class="err">No record found for this Reference No.</p>';
+    return;
+  }
+  box.innerHTML = `
+    <div class="panel"><div class="panel-body">
+      <p><strong>Name:</strong> ${esc(student.student_name)}</p>
+      <p><strong>Course:</strong> ${esc(student.course)} / ${esc(student.department)} / ${esc(student.ac_year)}</p>
+      <a class="btn btn-primary" href="bonafied.html?ureg_no=${encodeURIComponent(student.ureg_no)}">Apply for Bonafide</a>
+    </div></div>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Admission Portal</title>
+<link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<div class="header">
+  <div class="wrap">
+    <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+    <div class="call-sec">
+      <h4>For Online Portal Related Query - 6203555913, 7857868200, 9942491931, 6207724443, 8102725827, 7061459153, 9942496795, 6203898139</h4>
+      <a class="btn btn-primary" href="#" onclick="return false;">Mid Term Examnation Slip</a>
+    </div>
+  </div>
+</div>
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="student-registration.html">Online Application</a></li>
+    <li><a href="check-university-record.html">Reprint</a></li>
+  </ul>
+</nav>
+
+<div class="middle-wrapper"><div class="container">
+
+  <div class="row">
+    <div class="col-12">
+      <h2 class="btn btn-danger btn-block">Student Register For bonafide</h2>
+      <ul>
+        <li>Any wrong information in form fill up will cause cancellation of bonafide.</li>
+        <li>After register go for online bonafide process.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="successBox" class="panel" style="display:none;">
+    <div class="panel-body" style="text-align:center;">
+      <h4 style="color:#d9534f;">
+        Please Keep This Reference Number for Future Reference : <span id="uregOut"></span>
+        &nbsp;&nbsp;<a class="btn btn-primary" id="applyLink" href="#">Click Here For Apply</a>
+      </h4>
+    </div>
+  </div>
+
+  <div class="panel" id="formBox"><div class="panel-body">
+    <form id="regForm">
+      <div class="row form-group">
+        <div class="col-4"><div class="form-group">
+          <label>Student Name (अभ्यर्थी का नाम) *</label>
+          <input type="text" class="form-control" id="student_name" required>
+        </div></div>
+        <div class="col-4"><div class="form-group">
+          <label>Father Name *</label>
+          <input type="text" class="form-control" id="father_name" required>
+        </div></div>
+        <div class="col-4"><div class="form-group">
+          <label>College Roll No. *</label>
+          <input type="text" class="form-control" id="col_roll" required>
+        </div></div>
+
+        <div class="col-4"><div class="form-group">
+          <label>Course *</label>
+          <select id="course" class="form-control" required>
+            <option value="">Select Course</option>
+          </select>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Programme *</label>
+          <select id="department" class="form-control" required><option value="">Select Programme</option></select>
+        </div></div>
+        <div class="col-3"><div class="form-group">
+          <label>Academic Year *</label>
+          <select id="ac_year" class="form-control" required><option value="">Select Academic Year</option></select>
+        </div></div>
+        <div class="col-2"><div class="form-group">
+          <label>Fee Paid</label>
+          <input type="number" class="form-control" id="fee_paid" required>
+        </div></div>
+
+        <div class="col-4"><input type="submit" value="Submit" class="btn btn-primary"></div>
+      </div>
+    </form>
+  </div></div>
+
+</div></div>
+
+<footer><p>All Rights Reserved &copy; 2026. M.K.S. COLLEGE</p></footer>
+
+<script src="js/app.js"></script>
+<script>
+const courseSel = document.getElementById('course');
+COURSES.forEach(c => courseSel.innerHTML += `<option value="${c}">${c}</option>`);
+
+courseSel.addEventListener('change', function () {
+  const c = this.value;
+  const deptSel = document.getElementById('department');
+  const yearSel = document.getElementById('ac_year');
+  deptSel.innerHTML = '<option value="">Select Programme</option>';
+  yearSel.innerHTML = '<option value="">Select Academic Year</option>';
+  (DEPARTMENTS[c] || []).forEach(d => deptSel.innerHTML += `<option value="${d}">${d}</option>`);
+  (AC_YEARS[c] || []).forEach(y => yearSel.innerHTML += `<option value="${y}">${y}</option>`);
+});
+
+document.getElementById('regForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const student = {
+    ureg_no: genUregNo(),
+    student_name: document.getElementById('student_name').value.trim(),
+    father_name: document.getElementById('father_name').value.trim(),
+    col_roll: document.getElementById('col_roll').value.trim(),
+    course: document.getElementById('course').value,
+    department: document.getElementById('department').value,
+    ac_year: document.getElementById('ac_year').value,
+    fee_paid: document.getElementById('fee_paid').value,
+    status: 'REGISTERED'
+  };
+  if (!student.student_name || !student.father_name || !student.col_roll || !student.course || !student.department || !student.ac_year) {
+    alert('Please fill all required fields.');
+    return;
+  }
+  const students = getStudents();
+  students.push(student);
+  saveStudents(students);
+
+  document.getElementById('formBox').style.display = 'none';
+  document.getElementById('uregOut').textContent = student.ureg_no;
+  document.getElementById('applyLink').href = 'bonafied.html?ureg_no=' + encodeURIComponent(student.ureg_no);
+  document.getElementById('successBox').style.display = 'block';
+});
+</script>
+</body>
+</html>
